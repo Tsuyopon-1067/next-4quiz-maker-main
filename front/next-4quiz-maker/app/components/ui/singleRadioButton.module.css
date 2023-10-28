@@ -9,6 +9,7 @@
     text-align: center;
     line-height: 2cm;
     cursor: pointer;
+    margin: 0 1cm;
 }
 
 .button_unchecked {
@@ -22,6 +23,7 @@
     text-align: center;
     line-height: 2cm;
     cursor: pointer;
+    margin: 0 1cm;
 }
 
 
