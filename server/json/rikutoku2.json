@@ -1,0 +1,25 @@
+{
+    "rikutoku" : {
+        "dir" : "rikutoku",
+        "questions" : [
+            {
+                "number" : 1,
+                "file" : "q1.html",
+                "answer" : "2",
+                "options" : ["1", "2", "3", "4"]
+            },
+            {
+                "number" : 2,
+                "file" : "q2.html",
+                "answer" : "3",
+                "options" : ["1", "2", "3", "4"]
+            },
+            {
+                "number" : 3,
+                "file" : "q3.html",
+                "answer" : "2",
+                "options" : ["1", "2", "3", "4"]
+            }
+        ]
+    }
+}
