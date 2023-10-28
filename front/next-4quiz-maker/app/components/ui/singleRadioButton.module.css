@@ -1,0 +1,30 @@
+.button_checked {
+    width: 2cm;
+    height: 2cm;
+    background-color: #f00;
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 0;
+    font-size: 16px;
+    text-align: center;
+    line-height: 2cm;
+    cursor: pointer;
+}
+
+.button_unchecked {
+    width: 2cm;
+    height: 2cm;
+    background-color: #fff;
+    color: #000;
+    border: 2px solid #000;
+    border-radius: 0;
+    font-size: 16px;
+    text-align: center;
+    line-height: 2cm;
+    cursor: pointer;
+}
+
+
+.square-button:hover {
+    background-color: #eee;
+}
