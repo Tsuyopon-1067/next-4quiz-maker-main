@@ -20,6 +20,7 @@ const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({ optionList, onChang
   for (let i = 0; i < optionList.length; i++) {
     radioButtons.push(
       <SingleRadioButton
+        key={i+1}
         button_text={optionList[i]}
         optionNumber={i+1}
         selectedNumber={selected}
