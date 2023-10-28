@@ -4,11 +4,11 @@ import React, { useState } from "react";
 import SingleRadioButton from "./singleRadioButton";
 
 interface RadioButtonGroupProps {
-  size: number;
+  optionList: string[];
   onChange: (selectedOption: number) => void;
 }
 
-const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({ size, onChange }) => {
+const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({ optionList, onChange }) => {
   const [selected, setSelected] = useState<number>(0);
 
   const handleRadioButtonClick = (optionNumber: number) => {
@@ -17,11 +17,11 @@ const RadioButtonGroup: React.FC<RadioButtonGroupProps> = ({ size, onChange }) =
   };
 
   const radioButtons = [];
-  for (let i = 1; i <= size; i++) {
+  for (let i = 0; i < optionList.length; i++) {
     radioButtons.push(
       <SingleRadioButton
-        button_text={String(i)}
-        optionNumber={i}
+        button_text={optionList[i]}
+        optionNumber={i+1}
         selectedNumber={selected}
         onChange={handleRadioButtonClick}
       />
