@@ -32,6 +32,7 @@ func httpServer() {
 			case REQUEST_JSON:
 				// JSONデータをエンコードしてHTTPレスポンスに書き込み
 				w.Header().Set("Content-Type", "application/json")
+				w.Header().Set("Access-Control-Allow-Origin", "*")
 				w.WriteHeader(http.StatusOK)
 
 				encoder := json.NewEncoder(w)
