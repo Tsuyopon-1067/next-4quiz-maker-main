@@ -1,0 +1,59 @@
+.title_bar {
+  background-color: #333;
+  color: #fff;
+  padding: 0.8em 1.2em;
+  font-size: 24px;
+  font-weight: bold;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.bottom_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+  background-color: #333;
+  padding: 0.5cm;
+}
+
+.radio_button_area {
+  padding: 20px;
+  width: 100%;
+}
+
+.arrow_button_area {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  width: 100%;
+}
+.arrow_button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 0.1cm 0.5cm;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 0 0.2cm;
+}
+
+.arrow_button:hover {
+  background-color: #45a049; /* ホバー時の背景色 */
+}
+
+.html_area {
+  width: 100%;
+  height: 10cm;
+}

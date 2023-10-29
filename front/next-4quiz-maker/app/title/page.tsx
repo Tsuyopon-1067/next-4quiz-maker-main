@@ -1,4 +1,4 @@
-import Image from 'next/image'
+import Link from 'next/link'
 import styles from './page.module.css'
 
 export default function Title() {
@@ -9,7 +9,9 @@ export default function Title() {
       </div>
 
       <div className={styles.button_div}>
-        <button className={styles.start_button}>Start</button>
+        <Link href="/question">
+          <button className={styles.start_button}>Start</button>
+        </Link>
       </div>
     </main>
   )
