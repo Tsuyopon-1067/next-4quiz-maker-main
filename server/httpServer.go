@@ -7,19 +7,23 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strconv"
 	"strings"
 )
 
 var dir string
 var questionData []Question
+var selectedAnswerData []SelectedAnswerData
+
 const (
     REQUEST_JSON int = iota
     REQUEST_HTML // question answer
-    REQUEST_SELECT
+    REQUEST_SEND_SELECT
+    REQUEST_GET_SELECT
 )
 
 func main() {
-	dir, questionData, _ = readJSON()
+	dir, questionData, selectedAnswerData, _ = readJSON()
 
 	go httpServer()
 	select {}
@@ -67,7 +71,27 @@ func httpServer() {
 					http.Error(w, "Error serving file content", http.StatusInternalServerError)
 					return
 				}
-			case REQUEST_SELECT:
+			case REQUEST_SEND_SELECT:
+				// GET_SELECT/1/2 -> 問題1で2番を選択
+				// URLからファイル名を取得
+				question, selected := urlToSendSelect(r.URL.Path)
+				selectedAnswerData[question-1].Selected = selected
+				fmt.Println(question, selected)
+			case REQUEST_GET_SELECT:
+				// SEND_SELECT/1 -> 問題1の情報を取得したい
+				// URLからファイル名を取得
+				question := urlToGetSelect(r.URL.Path)
+				// JSONデータをエンコードしてHTTPレスポンスに書き込み
+				w.Header().Set("Content-Type", "application/json")
+				w.Header().Set("Access-Control-Allow-Origin", "*")
+				w.WriteHeader(http.StatusOK)
+
+				encoder := json.NewEncoder(w)
+				if err := encoder.Encode(selectedAnswerData[question-1]); err != nil {
+					log.Println("JSONエンコードエラー:", err)
+					http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+					return
+				}
 		}
 
 	})
@@ -109,8 +133,10 @@ func getRequestType(url string) int {
 				return REQUEST_JSON
 			case "HTML":
 				return REQUEST_HTML
-			case "SELECT":
-				return REQUEST_SELECT
+			case "SEND_SELECT":
+				return REQUEST_SEND_SELECT
+			case "GET_SELECT":
+				return REQUEST_GET_SELECT
 		}
 	}
 	return REQUEST_HTML
@@ -132,4 +158,34 @@ func urlToPath(dir string, url string) string {
 		}
 	}
 	return ""
+}
+
+func urlToSendSelect(url string) (int, int) {
+	// URLパスをスラッシュで区切ってセグメントに分割
+	segments := strings.Split(url, "/")
+
+	resQuestion := 0
+	resSelected := 0
+	// 最初のセグメントは空文字列なので、2番目のセグメントを取得
+	if len(segments) > 1 {
+		if segments[1] == "SEND_SELECT"  {
+			resQuestion, _ = strconv.Atoi(segments[2])
+			resSelected, _ = strconv.Atoi(segments[3])
+		}
+	}
+	return resQuestion, resSelected
+}
+
+func urlToGetSelect(url string) (int) {
+	// URLパスをスラッシュで区切ってセグメントに分割
+	segments := strings.Split(url, "/")
+
+	res := 0
+	// 最初のセグメントは空文字列なので、2番目のセグメントを取得
+	if len(segments) > 1 {
+		if segments[1] == "GET_SELECT"  {
+			res, _ = strconv.Atoi(segments[2])
+		}
+	}
+	return res
 }
