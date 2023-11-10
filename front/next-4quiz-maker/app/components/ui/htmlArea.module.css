@@ -1,0 +1,12 @@
+.main {
+  width: 90vw;
+  background-color: green;
+  display: flex;
+}
+
+.iframe {
+  width: 90vw;
+  height: 80vw;
+  border: none;
+  margin: 0.3cm;
+}

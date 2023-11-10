@@ -1,0 +1,63 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6rem;
+  min-height: 100vh;
+  overflow: hidden;
+  animation: gradientAnimation 5s infinite linear;
+  background-image: linear-gradient(45deg, #FFF2F2, #FFFFF2, #F2FFF2, #F2FFFF, #F2F2FF, #FFF2FF);
+  background-size: 300% 300%;
+  animation: diagonalGradientAnimation 3s infinite;
+}
+
+@keyframes diagonalGradientAnimation {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+.title_bar {
+  background-color: #333;
+  color: #fff;
+  padding: 0.8em 1.2em;
+  font-size: 24px;
+  font-weight: bold;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.button_div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  min-height: 80vh;
+}
+
+.start_button {
+  color: #fff;
+  background-color: #f06;
+  border-bottom: 8px solid #b9540b;
+  height: 3cm;
+  width: 7cm;
+  font-size: 36px;
+}
+
+.start_button:hover {
+  color: #fff;
+  background-color: #d03;
+}
+
+.title_bar {
+  background-color: #00AAAA;
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+  padding: 0.3cm 0.5cm;
+}

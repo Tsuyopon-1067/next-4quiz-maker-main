@@ -1,0 +1,37 @@
+{
+    "rikutoku" : {
+        "dir" : "rikutoku2",
+        "questions" : [
+            {
+                "number" : 1,
+                "file" : "q1.html",
+                "answer" : 2,
+                "options" : ["1", "2", "3", "4"]
+            },
+            {
+                "number" : 2,
+                "file" : "q2.html",
+                "answer" : 3,
+                "options" : ["1", "2", "3", "4"]
+            },
+            {
+                "number" : 3,
+                "file" : "q3.html",
+                "answer" : 2,
+                "options" : ["1", "2", "3", "4"]
+            },
+            {
+                "number" : 4,
+                "file" : "q4.html",
+                "answer" : 2,
+                "options" : ["1", "2", "3", "4"]
+            },
+            {
+                "number" : 5,
+                "file" : "q5.html",
+                "answer" : 2,
+                "options" : ["1", "2", "3", "4"]
+            }
+        ]
+    }
+}
