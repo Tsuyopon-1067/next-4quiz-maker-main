@@ -53,9 +53,6 @@ export default function Question() {
     }
   }, [jsonData, nowPage]);
 
-  var bottomButtomArray = [
-
-  ]
   if (jsonData == null) {
     return
   }
