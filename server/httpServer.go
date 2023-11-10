@@ -72,25 +72,33 @@ func httpServer() {
 					return
 				}
 			case REQUEST_SEND_SELECT:
-				// GET_SELECT/1/2 -> 問題1で2番を選択
+				// SEND_SELECT/1/2  -> 問題1で2番を選択
 				// URLからファイル名を取得
+				// 情報を受け取るだけ Access-Control-Allow-Originはいらない
+				// けど怒られるので付与
+				w.Header().Set("Access-Control-Allow-Origin", "*")
 				question, selected := urlToSendSelect(r.URL.Path)
-				selectedAnswerData[question-1].Selected = selected
+				if question > 0 {
+					selectedAnswerData[question-1].Selected = selected
+				}
 				fmt.Println(question, selected)
+				printSelectedAnswer(selectedAnswerData)
 			case REQUEST_GET_SELECT:
-				// SEND_SELECT/1 -> 問題1の情報を取得したい
+				// GET_SELECT/1-> 問題1の情報を取得したい
 				// URLからファイル名を取得
+				fmt.Println("REQUEST_GET_SELECT")
 				question := urlToGetSelect(r.URL.Path)
 				// JSONデータをエンコードしてHTTPレスポンスに書き込み
 				w.Header().Set("Content-Type", "application/json")
 				w.Header().Set("Access-Control-Allow-Origin", "*")
 				w.WriteHeader(http.StatusOK)
 
-				encoder := json.NewEncoder(w)
-				if err := encoder.Encode(selectedAnswerData[question-1]); err != nil {
-					log.Println("JSONエンコードエラー:", err)
-					http.Error(w, "Internal Server Error", http.StatusInternalServerError)
-					return
+				if question > 0 {
+						// レスポンスヘッダーを設定
+						w.Header().Set("Content-Type", "text/plain")
+						// レスポンスボディにテキストデータを書き込む
+						fmt.Fprintf(w, strconv.Itoa(selectedAnswerData[question-1].Selected))
+						return
 				}
 		}
 
