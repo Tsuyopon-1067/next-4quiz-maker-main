@@ -1,14 +1,15 @@
 "use client"
 import Image from 'next/image'
 import styles from './page.module.css'
-import React, { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
+import React, { useState, useEffect, FC } from "react";
 //import SingleRadioButton from "../components/ui/singleRadioButton";
 import RadioButtonGroup from "../components/ui/radioButtonGroup";
 import HtmlArea from "../components/ui/htmlArea";
-import { json } from 'stream/consumers';
 
 
 export default function Question() {
+  const router = useRouter();
   const [nowPage, setNowPage] = useState<number>(0);
   const [jsonData, setJsonData] = useState(null);
   const [questionUrl, setQuestionUrl] = useState("");
@@ -23,6 +24,9 @@ export default function Question() {
     if (nowPage >= 2) {
       setNowPage(nowPage-1)
     }
+  }
+  const clickEnd = () => {
+    router.push('/result');
   }
 
   useEffect(() => {
@@ -45,6 +49,9 @@ export default function Question() {
     }
   }, [jsonData, nowPage]);
 
+  var bottomButtomArray = [
+
+  ]
   if (jsonData == null) {
     return
   }
@@ -58,11 +65,44 @@ export default function Question() {
         <div className={styles.radio_button_area}>
           <RadioButtonGroup optionList={jsonData[nowPage-1].options} onChange={function (optionNumber: number): void {}} />
         </div>
-        <div className={styles.arrow_button_area}>
-          <button className={styles.arrow_button} onClick={prevPage}>⇦</button>
-          <button className={styles.arrow_button} onClick={nextPage}>⇨</button>
-        </div>
+        <ButtomButtoms prevPage={prevPage} nextPage={nextPage} clickEnd={clickEnd} nowPage={nowPage} lastPage={jsonData.length} />
       </div>
     </main>
   )
+}
+
+interface ButtomButtomsProps {
+  prevPage: () => void;
+  nextPage: () => void;
+  clickEnd: () => void;
+  nowPage: number;
+  lastPage: number;
+}
+
+const ButtomButtoms: FC<ButtomButtomsProps> = (props) => {
+  const { nowPage, lastPage, prevPage, nextPage, clickEnd } = props;
+  var buttons;
+
+  if (nowPage < lastPage) {
+    buttons = (
+      <>
+        <button className={styles.arrow_button} onClick={prevPage}>⇦</button>
+        <button className={styles.arrow_button} onClick={nextPage}>⇨</button>
+      </>
+    );
+  } else {
+    buttons = (
+      <>
+        <button className={styles.arrow_button} onClick={clickEnd}>終了</button>
+        <button className={styles.arrow_button} onClick={prevPage}>⇦</button>
+        <button className={`${styles.arrow_button} ${styles.hide_button}`} onClick={nextPage}>⇨</button>
+      </>
+    );
+  }
+
+  return (
+    <div className={styles.arrow_button_area}>
+      {buttons}
+    </div>
+  );
 }

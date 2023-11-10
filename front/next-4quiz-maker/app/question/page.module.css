@@ -34,6 +34,7 @@
   align-items: flex-end;
   width: 100%;
 }
+
 .arrow_button {
   background-color: #4CAF50;
   color: #fff;
@@ -47,10 +48,15 @@
   align-items: center;
   text-align: center;
   margin: 0 0.2cm;
+  height: 1.1cm;
 }
 
 .arrow_button:hover {
   background-color: #45a049; /* ホバー時の背景色 */
+}
+
+.hide_button {
+  visibility: hidden;
 }
 
 .html_area {
