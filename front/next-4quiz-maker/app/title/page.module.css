@@ -41,7 +41,7 @@
 
 .start_button {
   color: #fff;
-  background-color: #eb6100;
+  background-color: #f06;
   border-bottom: 8px solid #b9540b;
   height: 3cm;
   width: 7cm;
@@ -50,7 +50,7 @@
 
 .start_button:hover {
   color: #fff;
-  background: #f56500;
+  background-color: #d03;
 }
 
 .title_bar {
