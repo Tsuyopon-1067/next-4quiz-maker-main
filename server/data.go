@@ -70,3 +70,9 @@ func readJSON() (string, []Question, []SelectedAnswerData, error) {
 
 	return quizData.Rikutoku.Dir, quizData.Rikutoku.Questions, selectedAnswerData, nil
 }
+
+func printSelectedAnswer(selectedAnswerData []SelectedAnswerData) {
+	for i, v := range selectedAnswerData {
+		fmt.Printf("%d: %d, %d\n", i, v.Selected, v.Answer)
+	}
+}
