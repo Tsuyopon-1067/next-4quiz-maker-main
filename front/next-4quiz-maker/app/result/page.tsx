@@ -3,6 +3,7 @@ import Link from 'next/link'
 import styles from './page.module.css'
 import React, { useState, useEffect } from "react";
 import ResultArea from "../components/ui/resultArea";
+import { useRouter } from 'next/navigation';
 
 interface ResultJson {
   num: number;
@@ -18,8 +19,12 @@ interface QuizJson {
 }
 
 export default function Result() {
-const [resultJsonData, setResultJsonData] = useState<ResultJson | null>(null);
-const [quizJsonData, setQuizJsonData] = useState<QuizJson[] | null>(null);
+  const [resultJsonData, setResultJsonData] = useState<ResultJson | null>(null);
+  const [quizJsonData, setQuizJsonData] = useState<QuizJson[] | null>(null);
+  const router = useRouter();
+  const goTitle = () => {
+      router.push('/title');
+  }
 
   useEffect(() => {
     // ローカルサーバーからJSONデータを取得する
@@ -61,18 +66,21 @@ const [quizJsonData, setQuizJsonData] = useState<QuizJson[] | null>(null);
           <div className={styles.card_element}>問題</div>
           <div className={styles.card_element}>解説</div>
         </div>
-        <div>
-          {resultJsonData.map((elem: ResultJson, index: number) => (
-            <div key={index}>
-              <ResultArea
-              num={index+1}
-              selected={quizJsonData[index].options[elem.Selected]}
-              answer={quizJsonData[index].options[elem.Answer]}
-              questionUrl={"http://localhost:50000/HTML/question/" + quizJsonData[index].file}
-              answerUrl={"http://localhost:50000/HTML/answer/" + quizJsonData[index].file} />
-            </div>
-          ))}
-        </div>
+      </div>
+      <div>
+        {resultJsonData.map((elem: ResultJson, index: number) => (
+          <div key={index}>
+            <ResultArea
+            num={index+1}
+            selected={quizJsonData[index].options[elem.Selected]}
+            answer={quizJsonData[index].options[elem.Answer]}
+            questionUrl={"http://localhost:50000/HTML/question/" + quizJsonData[index].file}
+            answerUrl={"http://localhost:50000/HTML/answer/" + quizJsonData[index].file} />
+          </div>
+        ))}
+      </div>
+      <div className={styles.end_button} onClick={goTitle}>
+        最初に戻る
       </div>
     </div>
   )
