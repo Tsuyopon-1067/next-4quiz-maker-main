@@ -20,6 +20,7 @@ const (
     REQUEST_HTML // question answer
     REQUEST_SEND_SELECT
     REQUEST_GET_SELECT
+	REQUEST_GET_RESULT
 )
 
 func main() {
@@ -100,6 +101,19 @@ func httpServer() {
 						fmt.Fprintf(w, strconv.Itoa(selectedAnswerData[question-1].Selected))
 						return
 				}
+			case REQUEST_GET_RESULT:
+				fmt.Println("GET RESULT")
+				// JSONデータをエンコードしてHTTPレスポンスに書き込み
+				w.Header().Set("Content-Type", "application/json")
+				w.Header().Set("Access-Control-Allow-Origin", "*")
+				w.WriteHeader(http.StatusOK)
+
+				encoder := json.NewEncoder(w)
+				if err := encoder.Encode(selectedAnswerData); err != nil {
+					log.Println("JSONエンコードエラー:", err)
+					http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+					return
+				}
 		}
 
 	})
@@ -145,6 +159,8 @@ func getRequestType(url string) int {
 				return REQUEST_SEND_SELECT
 			case "GET_SELECT":
 				return REQUEST_GET_SELECT
+			case "GET_RESULT":
+				return REQUEST_GET_RESULT
 		}
 	}
 	return REQUEST_HTML
