@@ -10,7 +10,7 @@ interface RadioButtonGroupProps {
 }
 
 const RadioButtonGroup: React.FC<RadioButtonGroupProps> = (props) => {
-  const {optionList, selectedOption} = props;
+  const {optionList, selectedOption, onChange} = props;
   const [selected, setSelected] = useState<number>(0);
 
   const handleRadioButtonClick = (optionNumber: number) => {
@@ -18,10 +18,15 @@ const RadioButtonGroup: React.FC<RadioButtonGroupProps> = (props) => {
   };
 
   useEffect(() => {
-    if (props.onChange) {
-      props.onChange(selected);
-    }
+    if (onChange) {
+        onChange(selected);
+      }
   }, [selected]);
+
+  useEffect(() => {
+    setSelected(selectedOption);
+  }, [selectedOption]);
+
 
   const radioButtons = [];
   for (let i = 0; i < optionList.length; i++) {

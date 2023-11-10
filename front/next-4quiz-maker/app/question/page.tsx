@@ -13,6 +13,7 @@ export default function Question() {
   const [nowPage, setNowPage] = useState<number>(0);
   const [jsonData, setJsonData] = useState(null);
   const [questionUrl, setQuestionUrl] = useState("");
+  const [selectedOption, setSelectedOption] = useState<number>(0);
   const nextPage = () => {
     if (jsonData != null) {
       if (nowPage+1 <= jsonData.length) {
@@ -36,7 +37,6 @@ export default function Question() {
   useEffect(() => {
     // ローカルサーバーからJSONデータを取得する
     if (nowPage === 0) {
-      setNowPage(1);
       fetch('http://localhost:50000/JSON', { method: 'GET' })
             .then((response) => response.json())
             .then((data) => {
@@ -44,6 +44,7 @@ export default function Question() {
             })
             .catch((error) => console.error('Error fetching JSON:', error));
       }
+      setNowPage(1);
     }, []);
 
   useEffect(() => {
@@ -53,6 +54,23 @@ export default function Question() {
     }
   }, [jsonData, nowPage]);
 
+  useEffect(() => {
+      fetch('http://localhost:50000/GET_SELECT/' + nowPage , { method: 'GET' })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTPエラー！ステータスコード: ${response.status}`);
+        }
+        return response.text(); // レスポンスボディをテキストとして解析
+      })
+      .then((textData) => {
+        setSelectedOption(Number(textData)); // レスポンスデータをstateにセット
+      })
+      .catch((error) => {
+        console.error('HTTPリクエストエラー:', error);
+      });
+  },[nowPage]);
+
+  var nowJson
   if (jsonData == null) {
     return
   }
@@ -64,7 +82,7 @@ export default function Question() {
       <HtmlArea url={questionUrl} />
       <div className={styles.bottom_container}>
         <div className={styles.radio_button_area}>
-          <RadioButtonGroup optionList={jsonData[nowPage-1].options} onChange={sendOption} />
+          <RadioButtonGroup optionList={jsonData[nowPage-1].options} onChange={sendOption} selectedOption={selectedOption} />
         </div>
         <ButtomButtoms prevPage={prevPage} nextPage={nextPage} clickEnd={clickEnd} nowPage={nowPage} lastPage={jsonData.length} />
       </div>
