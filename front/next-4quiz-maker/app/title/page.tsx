@@ -5,7 +5,7 @@ export default function Title() {
   return (
     <main className={styles.main}>
       <div className={styles.title_bar}>
-        hogehoge
+        next-4quiz-maker
       </div>
 
       <div className={styles.button_div}>

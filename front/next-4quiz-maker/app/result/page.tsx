@@ -49,19 +49,19 @@ const [quizJsonData, setQuizJsonData] = useState<QuizJson[] | null>(null);
   }
   return (
     <div>
-    <main>
-      解答
-    </main>
-      <div className={styles.title_bar}>
-        <div className={styles.card}>
-          <div className={styles.content}>
-            <div className={styles.card_element}>#</div>
-            <div className={styles.card_element}>正誤</div>
-            <div className={styles.card_element}>あなたの回答</div>
-            <div className={styles.card_element}>正解</div>
-            <div className={styles.card_element}>問題</div>
-            <div className={styles.card_element}>解説</div>
-          </div>
+      <main>
+        <div className={styles.title_bar}>
+          解答
+        </div>
+      </main>
+      <div className={styles.card}>
+        <div className={styles.content}>
+          <div className={styles.card_element}>#</div>
+          <div className={styles.card_element}>正誤</div>
+          <div className={styles.card_element}>あなたの回答</div>
+          <div className={styles.card_element}>正解</div>
+          <div className={styles.card_element}>問題</div>
+          <div className={styles.card_element}>解説</div>
         </div>
         <div>
           {resultJsonData.map((elem: ResultJson, index: number) => (
@@ -75,10 +75,7 @@ const [quizJsonData, setQuizJsonData] = useState<QuizJson[] | null>(null);
             </div>
           ))}
         </div>
-
       </div>
-
-
     </div>
   )
 }

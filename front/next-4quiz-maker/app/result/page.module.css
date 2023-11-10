@@ -25,3 +25,12 @@
   width: 4.0cm;
   text-align: center;
 }
+
+.title_bar {
+  background-color: #00AAAA;
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  margin: 0;
+  padding: 0.3cm 0.5cm;
+}

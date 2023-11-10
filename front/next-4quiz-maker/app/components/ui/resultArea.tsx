@@ -22,12 +22,12 @@ const ResultArea: React.FC<ResultAreaProps> = (props) => {
         <div className={styles.card_element}>{answer}</div>
         <div className={styles.card_element}>
           <div className={styles.button}>
-            <a href={questionUrl}>問題</a>
+            <a className={styles.atag} href={questionUrl}>問題</a>
           </div>
         </div>
         <div className={styles.card_element}>
           <div className={styles.button}>
-            <a href={answerUrl}>解説</a>
+            <a className={styles.atag} href={answerUrl}>解説</a>
           </div>
         </div>
       </div>

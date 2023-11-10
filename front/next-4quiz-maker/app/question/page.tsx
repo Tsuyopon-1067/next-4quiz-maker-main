@@ -75,9 +75,9 @@ export default function Question() {
     return
   }
   return (
-    <main className={styles.main}>
+    <div>
       <div className={styles.title_bar}>
-        hogehoge question
+        第{nowPage}問
       </div>
       <HtmlArea url={questionUrl} />
       <div className={styles.bottom_container}>
@@ -86,7 +86,7 @@ export default function Question() {
         </div>
         <ButtomButtoms prevPage={prevPage} nextPage={nextPage} clickEnd={clickEnd} nowPage={nowPage} lastPage={jsonData.length} />
       </div>
-    </main>
+    </div>
   )
 }
 
