@@ -29,6 +29,10 @@ export default function Question() {
     router.push('/result');
   }
 
+  const sendOption = (selectedOption: number) => {
+      fetch("http://localhost:50000/SEND_SELECT/" + nowPage + "/" + selectedOption, { method: 'GET' });
+  }
+
   useEffect(() => {
     // ローカルサーバーからJSONデータを取得する
     if (nowPage === 0) {
@@ -63,7 +67,7 @@ export default function Question() {
       <HtmlArea url={questionUrl} />
       <div className={styles.bottom_container}>
         <div className={styles.radio_button_area}>
-          <RadioButtonGroup optionList={jsonData[nowPage-1].options} onChange={function (optionNumber: number): void {}} />
+          <RadioButtonGroup optionList={jsonData[nowPage-1].options} onChange={sendOption} />
         </div>
         <ButtomButtoms prevPage={prevPage} nextPage={nextPage} clickEnd={clickEnd} nowPage={nowPage} lastPage={jsonData.length} />
       </div>
