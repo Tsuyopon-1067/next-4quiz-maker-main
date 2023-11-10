@@ -75,7 +75,7 @@ export default function Question() {
     return
   }
   return (
-    <div>
+    <div className={styles.main}>
       <div className={styles.title_bar}>
         第{nowPage}問
       </div>

@@ -48,12 +48,10 @@ const [quizJsonData, setQuizJsonData] = useState<QuizJson[] | null>(null);
     return
   }
   return (
-    <div>
-      <main>
-        <div className={styles.title_bar}>
-          解答
-        </div>
-      </main>
+    <div className={styles.main}>
+      <div className={styles.title_bar}>
+        解答
+      </div>
       <div className={styles.card}>
         <div className={styles.content}>
           <div className={styles.card_element}>#</div>
